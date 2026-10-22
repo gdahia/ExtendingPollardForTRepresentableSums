@@ -1,6 +1,6 @@
 {
-  "challenge_module": "Challenge",
-  "solution_module": "Solution",
+  "challenge_module": "ExtendingPollardForTRepresentableSumsPalomar.Challenge",
+  "solution_module": "ExtendingPollardForTRepresentableSumsPalomar.Solution",
   "theorem_names": [
     "ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums'",
     "ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums_two'",
