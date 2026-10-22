@@ -1,0 +1,19 @@
+{
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
+  "theorem_names": [
+    "ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums'",
+    "ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums_two'",
+    "ExtendingPollard.mul_card_add_mul_card_le_or_exists_vadd_subset_representableSums_two'",
+    "ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums_two_mul'",
+    "ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums_three'",
+    "ExtendingPollard.mul_min_le_sumCardRepresentableSums'",
+    "ExtendingPollard.card_add_lt_card_add_insert'"
+  ],
+  "definition_names": [
+    "ExtendingPollard.representableSums",
+    "ExtendingPollard.numHoles"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}

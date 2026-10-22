@@ -1,0 +1,144 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Pollard's theorem for t-representable sums"
+  description: >-
+    A Lean 4 formalization of Grynkiewicz's Kneser-type extension of Pollard's theorem. For finite
+    subsets A, B of an abelian group with |A|, |B| >= t >= 1, either the sum of the sizes of the
+    sets of i-representable sums for i = 1, ..., t is at least t|A| + t|B| - 2t^2 + 1, or the set
+    of t-representable sums is the sumset of large subsets A', B' and a Kneser-type bound in terms
+    of its stabilizer holds. It includes the optimal case t = 2, the corollary on cosets of size at
+    least 3, the remark ending the introduction, and Lemmas 2.1 and 2.2.
+  authors:
+    - "Gabriel Dahia"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Gabriel Dahia"
+
+classification:
+  arxiv: ["math.NT", "math.CO"]
+  msc2020: ["11P70", "11B75"]
+
+sources:
+  - title: "On extending Pollard's theorem for t-representable sums"
+    authors:
+      - "David J. Grynkiewicz"
+    id: "https://doi.org/10.1007/s11856-010-0053-6"
+    type: "paper"
+    location: "Israel Journal of Mathematics 177 (2010), 413-439; arXiv:0803.2601"
+    relationship: "formalizes"
+    note: >-
+      Theorems 1.1 and 1.2, Corollary 1.3, the remark ending Section 1, and Lemmas 2.1 and 2.2.
+      The proof follows Steps 1 to 4 of Section 2; Case 4.2 is argued through the cosets of the
+      stabilizer instead of the three subcases of the paper.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+
+related_formalizations:
+  - id: "https://github.com/leanprover-community/mathlib4"
+    relationship: "builds-on"
+    note: >-
+      The statements use Finset.addConvolution for the number of representations,
+      AddAction.stabilizer, AddSubgroup, Set.ncard and Nat.card. The proofs use the Mathlib
+      library of finsets, pointwise operations and additive energy.
+  - id: "https://github.com/YaelDillies/MiscYD"
+    relationship: "builds-on"
+    note: >-
+      The files Kneser/MulStab.lean and Kneser/Kneser.lean contain the finset stabilizer and the
+      proof of Kneser's theorem from MiscYD by Yaël Dillies and Mantas Bakšys, with only their
+      import paths changed. The proofs use Kneser's theorem through them.
+
+status:
+  scope: >-
+    Formalized: Theorems 1.1 and 1.2, Corollary 1.3, the remark ending Section 1 (for the failure of
+    (6) and, when t = 2, of (10)), Lemma 2.1 and Lemma 2.2, and Proposition E(i) as an auxiliary
+    lemma. Not formalized: Examples 1 and 2, and Theorems A to D and Proposition E(ii), which the
+    paper cites. Kneser's theorem (Theorem A) is used through the MiscYD files.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5"]
+      framework: "Claude Code"
+      tool_setup: >-
+        Claude Code in a terminal, with the Lean compiler, lake build and lake shake. The agent read
+        the paper, wrote the statements, proofs and documentation, and compiled each file.
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "not tracked"
+        hardware: "local machine"
+      prompting_notes: >-
+        The maintainer asked the agent to formalize the paper from its arXiv link and published PDF,
+        and to look for earlier formalizations in the repositories of Yaël Dillies, the Palomar
+        registry and TauCeti. A project style profile set the conventions for the proofs and the
+        metadata.
+  spend_usd: "not tracked"
+  notes: >-
+    An AI coding agent produced the formalization. The maintainer gave the task and the style
+    conventions. The statements have not been reviewed.
+
+fidelity:
+  divergences: >-
+    The group is an additive commutative group with decidable equality. The stabilizer H of
+    A +_t B is AddAction.stabilizer of its underlying set, passed as an equation hypothesis, and
+    "H is nontrivial" is H ≠ ⊥. The number of H-holes |A' + H| - |A'| is numHoles, defined with
+    Set.ncard. Inequality (9) and (13) are stated in the integers. In Theorem 1.2 and Corollary 1.3
+    the set A +_1 B is written A + B. The remark ending Section 1 is stated as two separate
+    theorems: they give subsets A', B' with (7) and with A' +_{2t} B' = A' + B' = A +_{2t} B =
+    A +_t B and |H| >= 2t + ρ when (6) fails, and with the same for 3 in place of 2t and |H| >= 3 + ρ
+    when t = 2 and (10) fails, without restating (9). Corollary 1.3 states the coset as
+    x +ᵥ H contained in A +_2 B with 3 <= Nat.card H. Lemma 2.1 drops the hypotheses
+    |A| >= |B|, k >= 1 and |A| >= |T|, keeping k <= |B| and t >= 1. Lemma 2.2 states aperiodicity of
+    A + B as the triviality of its stabilizer.
+
+review:
+  status: "unchecked"
+  reviewers: []
+  notes: "Unreviewed"
+
+alignment:
+  namespace: "ExtendingPollard"
+  statements:
+    - source: "Theorem 1.1"
+      lean: "ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums'"
+      module: "Challenge"
+      status: "proved"
+      note: "Bound (6), or subsets with (7), (8), a nontrivial stabilizer and both inequalities of (9)."
+    - source: "Theorem 1.2"
+      lean: "ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums_two'"
+      module: "Challenge"
+      status: "proved"
+      note: "Bound (10), or subsets with (11), (12), a nontrivial stabilizer and both inequalities of (13)."
+    - source: "Corollary 1.3"
+      lean: "ExtendingPollard.mul_card_add_mul_card_le_or_exists_vadd_subset_representableSums_two'"
+      module: "Challenge"
+      status: "proved"
+      note: "The coset x + H is the set x +ᵥ H of an additive subgroup H."
+    - source: "Remark ending Section 1, when (6) fails"
+      lean: "ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums_two_mul'"
+      module: "Challenge"
+      status: "proved"
+      note: "Every element with at least t representations has at least 2t."
+    - source: "Remark ending Section 1, when t = 2 and (10) fails"
+      lean: "ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums_three'"
+      module: "Challenge"
+      status: "proved"
+      note: "The case t = 2 of the bound |H| >= t + 1 + ρ and of A' +_{t+1} B' = A' + B' = A +_{t+1} B."
+    - source: "Lemma 2.1"
+      lean: "ExtendingPollard.mul_min_le_sumCardRepresentableSums'"
+      module: "Challenge"
+      status: "proved"
+      note: "Both inequalities of (14), under fewer hypotheses than the paper."
+    - source: "Lemma 2.2"
+      lean: "ExtendingPollard.card_add_lt_card_add_insert'"
+      module: "Challenge"
+      status: "proved"
+      note: "Aperiodicity of A + B is the triviality of its stabilizer."
+
+acknowledgements: >-
+  Lean 4 and Mathlib; the Palomar registry template; the Kneser files of MiscYD by Yaël Dillies and
+  Mantas Bakšys.
