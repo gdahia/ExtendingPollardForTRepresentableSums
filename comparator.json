@@ -10,10 +10,7 @@
     "ExtendingPollard.mul_min_le_sumCardRepresentableSums'",
     "ExtendingPollard.card_add_lt_card_add_insert'"
   ],
-  "definition_names": [
-    "ExtendingPollard.representableSums",
-    "ExtendingPollard.numHoles"
-  ],
+  "definition_names": [],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
   "enable_nanoda": true
 }

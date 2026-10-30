@@ -95,7 +95,7 @@ scope, and the use of AI coding agents.
 
 `Challenge.lean` imports only Mathlib. It defines `representableSums` and `numHoles` and states
 Theorems 1.1 and 1.2, Corollary 1.3, the remark ending Section 1 in two theorems, and Lemmas 2.1
-and 2.2. `comparator.json` names these seven theorems and the two definitions,
+and 2.2. `comparator.json` names these seven theorems,
 `ExtendingPollardForTRepresentableSumsPalomar.Challenge` and
 `ExtendingPollardForTRepresentableSumsPalomar.Solution` as the modules to compare, and `propext`,
 `Classical.choice` and `Quot.sound` as the permitted axioms. The two modules sit in
