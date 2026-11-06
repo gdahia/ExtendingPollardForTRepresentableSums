@@ -1,57 +1,87 @@
 # Pollard's theorem for $t$-representable sums
 
-A Lean 4 formalization of D. J. Grynkiewicz,
-[On extending Pollard's theorem for $t$-representable sums](https://doi.org/10.1007/s11856-010-0053-6),
-Israel J. Math. 177 (2010), 413–439 ([arXiv:0803.2601](https://arxiv.org/abs/0803.2601)).
+A Lean 4 formalization of D. J. Grynkiewicz, [On extending Pollard's theorem for t-representable
+sums](https://doi.org/10.1007/s11856-010-0053-6), Israel J. Math. 177 (2010), 413–439
+([arXiv:0803.2601](https://arxiv.org/abs/0803.2601)).
 
 For finite subsets $A$, $B$ of an abelian group $G$, let $r_{A,B}(x)$ be the number of pairs
-$(a, b) \in A \times B$ with $a + b = x$, and let $A +_i B = \{x : r_{A,B}(x) \ge i\}$ be the set of
-$i$-representable sums (`representableSums i A B`). Pollard's theorem bounds
-$\sum_{i=1}^t |A +_i B|$ from below in cyclic groups of prime order. The paper proves a Kneser-type
-version in every abelian group.
+$(a, b) \in A \times B$ with $a + b = x$, and let $A +\_i B = \lbrace x : r_{A,B}(x) \ge i\rbrace$
+be the set of $i$-representable sums (`representableSums i A B`). Pollard's theorem bounds
+$\sum_{i=1}^t \left\lvert A +\_i B\right\rvert$ from below in cyclic groups of prime order. The
+paper proves a Kneser-type version in every abelian group.
 
 ## Results
 
-In the statements below, $H$ is the stabilizer $\{x \in G : x + (A +_t B) = A +_t B\}$ of
-$A +_t B$ and $\rho = |A' + H| - |A'| + |B' + H| - |B'|$ is the number of $H$-holes of $A'$ and $B'$
-(`numHoles`).
+In the statements below, $H$ is the stabilizer $\lbrace x \in G : x + (A +\_t B) = A +\_t B\rbrace$
+of $A +\_t B$ and
+$\rho = \left\lvert A' + H\right\rvert - \left\lvert A'\right\rvert + \left\lvert B' + H\right\rvert - \left\lvert B'\right\rvert$
+is the number of $H$-holes of $A'$ and $B'$ (`numHoles`).
 
 **Theorem 1.1** (`ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums`).
-Let $|A|, |B| \ge t \ge 1$. Then either
-$$\sum_{i=1}^t |A +_i B| \ge t|A| + t|B| - 2t^2 + 1,$$
-or there are $A' \subseteq A$ and $B' \subseteq B$ with
-$l = |A \setminus A'| + |B \setminus B'| \le t - 1$, $A' +_t B' = A' + B' = A +_t B$, $H$ nontrivial,
-and
-$$\sum_{i=1}^t |A +_i B| \ge t|A| + t|B| - (t - l)(|H| - \rho) - tl \ge t|A| + t|B| - t|H|.$$
+Let $\left\lvert A\right\rvert, \left\lvert B\right\rvert \ge t \ge 1$. Then either
 
-**Theorem 1.2** (`ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums_two`).
-Let $|A|, |B| \ge 2$. Then either $|A + B| + |A +_2 B| \ge 2|A| + 2|B| - 4$, or there are
-$A' \subseteq A$ and $B' \subseteq B$ with $l = |A \setminus A'| + |B \setminus B'| \le 1$,
-$A' +_2 B' = A' + B' = A +_2 B$, $H$ nontrivial, and
-$$|A + B| + |A +_2 B| \ge 2|A| + 2|B| - (2 - l)(|H| - \rho) - 2l \ge 2|A| + 2|B| - 2|H|.$$
+$$\sum_{i=1}^t \left\lvert A +\_i B\right\rvert \ge
+t\left\lvert A\right\rvert + t\left\lvert B\right\rvert - 2t^2 + 1,$$
+
+or there are $A' \subseteq A$ and $B' \subseteq B$ with
+$l = \left\lvert A \setminus A'\right\rvert + \left\lvert B \setminus B'\right\rvert \le t - 1$,
+$A' +\_t B' = A' + B' = A +\_t B$, $H$ nontrivial, and
+
+$$\sum_{i=1}^t \left\lvert A +\_i B\right\rvert \ge
+t\left\lvert A\right\rvert + t\left\lvert B\right\rvert -
+(t - l)(\left\lvert H\right\rvert - \rho) - tl \ge
+t\left\lvert A\right\rvert + t\left\lvert B\right\rvert - t\left\lvert H\right\rvert.$$
+
+**Theorem 1.2**
+(`ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums_two`). Let
+$\left\lvert A\right\rvert, \left\lvert B\right\rvert \ge 2$. Then either
+$\left\lvert A + B\right\rvert + \left\lvert A +\_2 B\right\rvert \ge 2\left\lvert A\right\rvert + 2\left\lvert B\right\rvert - 4$,
+or there are $A' \subseteq A$ and $B' \subseteq B$ with
+$l = \left\lvert A \setminus A'\right\rvert + \left\lvert B \setminus B'\right\rvert \le 1$,
+$A' +\_2 B' = A' + B' = A +\_2 B$, $H$ nontrivial, and
+
+$$\left\lvert A + B\right\rvert + \left\lvert A +\_2 B\right\rvert \ge
+2\left\lvert A\right\rvert + 2\left\lvert B\right\rvert -
+(2 - l)(\left\lvert H\right\rvert - \rho) - 2l \ge
+2\left\lvert A\right\rvert + 2\left\lvert B\right\rvert - 2\left\lvert H\right\rvert.$$
 
 **Corollary 1.3**
-(`ExtendingPollard.mul_card_add_mul_card_le_or_exists_vadd_subset_representableSums_two`).
-Let $|A|, |B| \ge 2$. Then either $|A + B| + |A +_2 B| \ge 2|A| + 2|B| - 4$, or $A +_2 B$ contains a
-coset $x + K$ of a subgroup $K$ with $|K| \ge 3$.
+(`ExtendingPollard.mul_card_add_mul_card_le_or_exists_vadd_subset_representableSums_two`). Let
+$\left\lvert A\right\rvert, \left\lvert B\right\rvert \ge 2$. Then either
+$\left\lvert A + B\right\rvert + \left\lvert A +\_2 B\right\rvert \ge 2\left\lvert A\right\rvert + 2\left\lvert B\right\rvert - 4$,
+or $A +\_2 B$ contains a coset $x + K$ of a subgroup $K$ with $\left\lvert K\right\rvert \ge 3$.
 
 **Remark ending Section 1**
 (`ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums_two_mul`). Let
-$|A|, |B| \ge t \ge 1$. Then either $\sum_{i=1}^t |A +_i B| \ge t|A| + t|B| - 2t^2 + 1$, or there
-are $A' \subseteq A$ and $B' \subseteq B$ with $|A \setminus A'| + |B \setminus B'| \le t - 1$,
-$$A' +_{2t} B' = A' + B' = A +_{2t} B = A +_t B \quad\text{and}\quad |H| \ge 2t + \rho.$$
-For $t = 2$, `ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums_three`
-states that either $|A + B| + |A +_2 B| \ge 2|A| + 2|B| - 4$, or there are such $A'$, $B'$ with
-$A' +_3 B' = A' + B' = A +_3 B = A +_2 B$ and $|H| \ge 3 + \rho$.
+$\left\lvert A\right\rvert, \left\lvert B\right\rvert \ge t \ge 1$. Then either
+$\sum_{i=1}^t \left\lvert A +\_i B\right\rvert \ge t\left\lvert A\right\rvert + t\left\lvert B\right\rvert - 2t^2 + 1$,
+or there are $A' \subseteq A$ and $B' \subseteq B$ with
+$\left\lvert A \setminus A'\right\rvert + \left\lvert B \setminus B'\right\rvert \le t - 1$,
 
-**Lemma 2.1** (`ExtendingPollard.mul_min_le_sumCardRepresentableSums`). Let $k \le |B|$ and
-$t \ge 1$. If $r_{A,-B}(x) \le k$ for every $x \notin T$, then
-$$\sum_{i=1}^t |A +_i B| \ge t \min\left(\frac{|A||B|}{t + \sqrt{t(t-1)}},
-\frac{|A|^2|B|}{|T|(|B| - k) + k|A|}\right) \ge \min\left(\frac{|A||B|}{2},
-t \frac{|A|^2|B|}{|T|(|B| - k) + k|A|}\right).$$
+$$A' +\_{2t} B' = A' + B' = A +\_{2t} B =
+A +\_t B \quad\text{and}\quad \left\lvert H\right\rvert \ge 2t + \rho.$$
+
+For $t = 2$, `ExtendingPollard.mul_card_add_mul_card_le_or_exists_add_eq_representableSums_three`
+states that either
+$\left\lvert A + B\right\rvert + \left\lvert A +\_2 B\right\rvert \ge 2\left\lvert A\right\rvert + 2\left\lvert B\right\rvert - 4$,
+or there are such $A'$, $B'$ with $A' +\_3 B' = A' + B' = A +\_3 B = A +\_2 B$ and
+$\left\lvert H\right\rvert \ge 3 + \rho$.
+
+**Lemma 2.1** (`ExtendingPollard.mul_min_le_sumCardRepresentableSums`). Let
+$k \le \left\lvert B\right\rvert$ and $t \ge 1$. If $r_{A,-B}(x) \le k$ for every $x \notin T$, then
+
+$$\sum_{i=1}^t \left\lvert A +\_i B\right\rvert \ge
+t \min\left(\frac{\left\lvert A\right\rvert\left\lvert B\right\rvert}{t + \sqrt{t(t-1)}},
+\frac{\left\lvert A\right\rvert^2\left\lvert B\right\rvert}
+{\left\lvert T\right\rvert(\left\lvert B\right\rvert - k) + k\left\lvert A\right\rvert}\right) \ge
+\min\left(\frac{\left\lvert A\right\rvert\left\lvert B\right\rvert}{2},
+t \frac{\left\lvert A\right\rvert^2\left\lvert B\right\rvert}
+{\left\lvert T\right\rvert(\left\lvert B\right\rvert - k) + k\left\lvert A\right\rvert}\right).$$
 
 **Lemma 2.2** (`ExtendingPollard.card_add_lt_card_add_insert`). Let $A$, $B$ be nonempty with
-$|A + B| = |A| + |B| - 1$ and $A + B$ aperiodic. Then $|A + (B \cup \{b\})| > |A + B|$ for every
+$\left\lvert A + B\right\rvert = \left\lvert A\right\rvert + \left\lvert B\right\rvert - 1$ and
+$A + B$ aperiodic. Then
+$\left\lvert A + (B \cup \lbrace b\rbrace)\right\rvert > \left\lvert A + B\right\rvert$ for every
 $b \notin B$.
 
 [Solution.lean](ExtendingPollardForTRepresentableSumsPalomar/Solution.lean) proves each statement
@@ -60,24 +90,24 @@ library names with a prime, by the corresponding library theorem.
 
 | Declaration | Statement |
 | --- | --- |
-| `sumLowerBound_or_subsetSumsetEq` | The main dichotomy: `SumLowerBound t A B ∨ SubsetSumsetEq t A B` for $\lvert A\rvert, \lvert B\rvert \ge t \ge 1$. |
-| `SumLowerBound` | $t\lvert A\rvert + t\lvert B\rvert \le \sum_{i=1}^t \lvert A +_i B\rvert + d_t$ with $d_t = 2t^2 - 1$, or $d_2 = 4$ (`deficit`). |
-| `SubsetSumsetEq` | Conditions (7) and (8): $A +_t B = A' + B'$ for large subsets with $A' +_t B' = A' + B'$. |
+| `sumLowerBound_or_subsetSumsetEq` | The main dichotomy: `SumLowerBound t A B ∨ SubsetSumsetEq t A B` for $\left\lvert A\right\rvert, \left\lvert B\right\rvert \ge t \ge 1$. |
+| `SumLowerBound` | $t\left\lvert A\right\rvert + t\left\lvert B\right\rvert \le \sum_{i=1}^t \left\lvert A +\_i B\right\rvert + d_t$ with $d_t = 2t^2 - 1$, or $d_2 = 4$ (`deficit`). |
+| `SubsetSumsetEq` | Conditions (7) and (8): $A +\_t B = A' + B'$ for large subsets with $A' +\_t B' = A' + B'$. |
 | `SaturatedWitness` | Subsets as in (7) and (8) that are unions of the cosets they meet inside $A$ and $B$. |
-| `SubsetSumsetEq.exists_saturatedWitness` | Step 1: a saturated witness with $\lvert H\rvert - \rho \ge t + 1$. |
+| `SubsetSumsetEq.exists_saturatedWitness` | Step 1: a saturated witness with $\left\lvert H\right\rvert - \rho \ge t + 1$. |
 | `InductionHypothesis` | The theorem for all smaller pairs, in the order used by the induction. |
 | `sumLowerBound_or_subsetSumsetEq_of_erase` | Step 2: removing an element that loses at least $t$ representations. |
 | `le_card_inter` | Step 3: the Dyson transform keeps at least $t$ elements. |
 | `false_of_le_card_inter` | Step 4: the theorem for the Dyson transform $(A \cup B, A \cap B)$ gives a contradiction. |
-| `le_addConvolution_of_card_add_le` | Proposition E(i): if $\lvert A + B\rvert + k \le \lvert A\rvert + \lvert B\rvert$, every sum has at least $k$ representations. |
-| `card_add_sub_card_addStab_add_holes_le` | Kneser's theorem in the form $\lvert A + B\rvert \ge \lvert A\rvert + \lvert B\rvert - \lvert H\rvert + \rho$. |
+| `le_addConvolution_of_card_add_le` | Proposition E(i): if $\left\lvert A + B\right\rvert + k \le \left\lvert A\right\rvert + \left\lvert B\right\rvert$, every sum has at least $k$ representations. |
+| `card_add_sub_card_addStab_add_holes_le` | Kneser's theorem in the form $\left\lvert A + B\right\rvert \ge \left\lvert A\right\rvert + \left\lvert B\right\rvert - \left\lvert H\right\rvert + \rho$. |
 | `Finset.add_kneser` | Kneser's theorem. |
 
 ## Files
 
 | Files in `ExtendingPollardForTRepresentableSums/` | Contents |
 | --- | --- |
-| `RepresentableSums.lean` | The sets $A +_i B$ and the sum $\sum_{i=1}^t \lvert A +_i B\rvert$. |
+| `RepresentableSums.lean` | The sets $A +\_i B$ and the sum $\sum_{i=1}^t \left\lvert A +\_i B\right\rvert$. |
 | `Kneser/MulStab.lean`, `Kneser/Kneser.lean` | The stabilizer of a finset and Kneser's theorem. |
 | `KneserConsequences.lean` | Consequences of Kneser's theorem, Proposition E(i) and Lemma 2.2. |
 | `EnergyBound.lean` | Lemma 2.1, through the additive energy. |
