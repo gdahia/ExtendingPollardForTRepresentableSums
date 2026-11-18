@@ -1,4 +1,5 @@
 name = "ExtendingPollardForTRepresentableSums"
+enableArtifactCache = true
 version = "0.1.0"
 keywords = ["math"]
 defaultTargets = ["ExtendingPollardForTRepresentableSums", "Challenge", "Solution"]
